@@ -38,7 +38,7 @@ RUN groupadd -r supervisor && useradd -r -g supervisor -s /usr/sbin/nologin supe
     groupadd -r sandbox && useradd -r -g sandbox -d /sandbox -s /bin/bash sandbox
 
 #Omega Build
-FROM system AS builder  
+FROM system AS builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -145,12 +145,12 @@ COPY . ${OMEGACLAW_DIR}
 RUN cp ${OMEGACLAW_DIR}/run.metta /PeTTa/run.metta \
  && mkdir -p ${MEMORY_DIR}/chroma_db \
  && ln -s ${MEMORY_DIR}/chroma_db ./chroma_db \
- && chown -R 65534:65534 ${MEMORY_DIR} \
+ && chown -R sandbox:sandbox ${MEMORY_DIR} \
  && find ${MEMORY_DIR} -type f -exec chmod 0644 {} \; \
  && chmod 0444 ${MEMORY_DIR}/prompt.txt \
- && chown -R 65534:65534 /opt/huggingface /opt/sentence_transformers
+ && chown -R sandbox:sandbox /opt/huggingface /opt/sentence_transformers
 
-USER 65534:65534
+USER sandbox
 
 ENTRYPOINT ["sh", "run.sh", "run.metta"]
 CMD []
