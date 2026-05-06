@@ -1,9 +1,44 @@
 # syntax=docker/dockerfile:1.7
 
+# OmegaClaw OpenShell sandbox image
+
 # For maximum integrity, set this to an immutable digest in CI/CD.
 ARG SWIPL_IMAGE=docker.io/library/swipl:9.2.4
 
-FROM ${SWIPL_IMAGE} AS builder
+FROM ${SWIPL_IMAGE} AS system
+
+### From OpenShell base
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /sandbox
+
+# Core system dependencies
+# iproute2: network namespace management (ip netns, veth pairs)
+# iptables: bypass detection — LOG + REJECT rules for direct connection diagnostics
+# dnsutils: dig, nslookup
+# Python is managed entirely by uv (see devtools stage).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        dnsutils \
+        iproute2 \
+        iptables \
+        iputils-ping \
+        net-tools \
+        netcat-openbsd \
+        openssh-sftp-server \
+        procps \
+        traceroute \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create supervisor and sandbox users/groups
+RUN groupadd -r supervisor && useradd -r -g supervisor -s /usr/sbin/nologin supervisor && \
+    groupadd -r sandbox && useradd -r -g sandbox -d /sandbox -s /bin/bash sandbox
+
+#Omega Build
+FROM system AS builder  
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
