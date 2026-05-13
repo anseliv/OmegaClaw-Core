@@ -107,7 +107,7 @@ SentenceTransformer(model_name)
 print("Model download complete.")
 PY
 
-FROM ${SWIPL_IMAGE} AS runtime
+FROM builder AS runtime
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -140,7 +140,8 @@ ENV OMEGACLAW_DIR=/PeTTa/repos/OmegaClaw-Core
 ENV MEMORY_DIR=${OMEGACLAW_DIR}/memory
 
 # Bring in only local OmegaClaw source (filtered by .dockerignore).
-COPY . ${OMEGACLAW_DIR}
+# COPY . ${OMEGACLAW_DIR}
+RUN git clone https://github.com/asi-alliance/OmegaClaw-Core.git ${OMEGACLAW_DIR}
 
 RUN cp ${OMEGACLAW_DIR}/run.metta /PeTTa/run.metta \
  && mkdir -p ${MEMORY_DIR}/chroma_db \
