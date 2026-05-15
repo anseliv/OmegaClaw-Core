@@ -151,6 +151,25 @@ RUN cp ${OMEGACLAW_DIR}/run.metta /PeTTa/run.metta \
  && chmod 0444 ${MEMORY_DIR}/prompt.txt \
  && chown -R sandbox:sandbox /opt/huggingface /opt/sentence_transformers
 
+#Finalisation from OpenShell base dockerfile
+FROM devtools AS final
+
+# Add venvs to PATH -- /sandbox/.venv (writable, user-installed packages)
+# takes priority over system paths.
+# VIRTUAL_ENV and UV_PYTHON_INSTALL_DIR are also exported in .bashrc
+# so that login shell sessions (interactive and exec) see them.
+ENV PATH="/sandbox/.venv/bin:/usr/local/bin:/usr/bin:/bin" \
+    VIRTUAL_ENV="/sandbox/.venv"
+
+# Default sandbox network / filesystem policy
+COPY policy.yaml /etc/openshell/policy.yaml
+
+# Copy custom skills into the image.
+# To add a skill, create a subdirectory under sandboxes/base/skills/
+# with a SKILL.md file (and any supporting files). It will be installed into
+# both ~/.claude/skills/ and ~/.agents/skills/ for agent discovery.
+COPY skills/ /sandbox/.agents/skills/
+
 USER sandbox
 
 ENTRYPOINT ["sh", "run.sh", "run.metta"]
