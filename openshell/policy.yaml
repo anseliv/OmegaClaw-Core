@@ -8,8 +8,10 @@ filesystem_policy:
   - /dev/urandom
   - /app
   - /etc
+  - /opt
   - /var/log
   - /sys/devices/system
+  - /dev/shm
   read_write:
   - /sandbox
   - /PeTTa
@@ -19,8 +21,6 @@ filesystem_policy:
   - /opt/sentence_transformers
 landlock:
   compatibility: best_effort
-
-
 process:
   run_as_user: sandbox
   run_as_group: sandbox
@@ -33,6 +33,7 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/bin/python3.11
   allow_transfer_xethub_hf_co_443:
     name: allow_transfer_xethub_hf_co_443
     endpoints:
@@ -41,6 +42,7 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/bin/python3.11
   allow_us_aws_cdn_hf_co_443:
     name: allow_us_aws_cdn_hf_co_443
     endpoints:
@@ -49,6 +51,7 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/bin/python3.11
   huggingface:
     name: huggingface
     endpoints:
@@ -84,3 +87,4 @@ network_policies:
           path: /**
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/bin/python3.11

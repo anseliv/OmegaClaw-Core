@@ -38,12 +38,13 @@ RUN groupadd -r supervisor && useradd -r -g supervisor -s /usr/sbin/nologin supe
     groupadd -r sandbox && useradd -r -g sandbox -d /sandbox -s /bin/bash sandbox
 
 #Omega Build
-FROM system AS builder
+FROM ${SWIPL_IMAGE} AS builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
     HF_HOME=/opt/huggingface \
-    SENTENCE_TRANSFORMERS_HOME=/opt/sentence_transformers
+    SENTENCE_TRANSFORMERS_HOME=/opt/sentence_transformers \
+    JOBLIB_MULTIPROCESSING=0
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -107,7 +108,7 @@ SentenceTransformer(model_name)
 print("Model download complete.")
 PY
 
-FROM builder AS runtime
+FROM system AS runtime
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -145,14 +146,15 @@ RUN git clone https://github.com/asi-alliance/OmegaClaw-Core.git ${OMEGACLAW_DIR
 
 RUN cp ${OMEGACLAW_DIR}/run.metta /PeTTa/run.metta \
  && mkdir -p ${MEMORY_DIR}/chroma_db \
+ && mkdir -p /sandbox/.cache \
  && ln -s ${MEMORY_DIR}/chroma_db ./chroma_db \
  && chown -R sandbox:sandbox ${MEMORY_DIR} \
  && find ${MEMORY_DIR} -type f -exec chmod 0644 {} \; \
  && chmod 0444 ${MEMORY_DIR}/prompt.txt \
- && chown -R sandbox:sandbox /opt/huggingface /opt/sentence_transformers
+ && chown -R sandbox:sandbox /opt/huggingface /opt/sentence_transformers /sandbox/.cache
 
 #Finalisation from OpenShell base dockerfile
-FROM devtools AS final
+#FROM runtime AS final
 
 # Add venvs to PATH -- /sandbox/.venv (writable, user-installed packages)
 # takes priority over system paths.
