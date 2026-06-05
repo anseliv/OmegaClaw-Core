@@ -174,5 +174,5 @@ COPY skills/ /sandbox/.agents/skills/
 
 USER sandbox
 
-ENTRYPOINT ["sh", "run.sh", "run.metta"]
+#ENTRYPOINT ["sh", "run.sh", "run.metta"]
 CMD []

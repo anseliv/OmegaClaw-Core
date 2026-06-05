@@ -33,7 +33,44 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
     - path: /usr/bin/python3.11
+  allow_chat_singularitynet_io_443:
+    name: allow_chat_singularitynet_io_443
+    endpoints:
+    - host: chat.singularitynet.io
+      port: 443
+    binaries:
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
+  allow_duckduckgo_com_443:
+    name: allow_duckduckgo_com_443
+    endpoints:
+    - host: duckduckgo.com
+      port: 443
+    binaries:
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
+  allow_grpc_dorado_fetch_ai_443:
+    name: allow_grpc_dorado_fetch_ai_443
+    endpoints:
+    - host: grpc-dorado.fetch.ai
+      port: 443
+    binaries:
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
+  allow_grpc_fetchhub_fetch_ai_443:
+    name: allow_grpc_fetchhub_fetch_ai_443
+    endpoints:
+    - host: grpc-fetchhub.fetch.ai
+      port: 443
+    binaries:
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
+  allow_inference_asicloud_cudos_org_443:
+    name: allow_inference_asicloud_cudos_org_443
+    endpoints:
+    - host: inference.asicloud.cudos.org
+      port: 443
+    binaries:
+    - path: /**
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
   allow_transfer_xethub_hf_co_443:
     name: allow_transfer_xethub_hf_co_443
     endpoints:
@@ -42,6 +79,7 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
     - path: /usr/bin/python3.11
   allow_us_aws_cdn_hf_co_443:
     name: allow_us_aws_cdn_hf_co_443
@@ -51,7 +89,28 @@ network_policies:
       access: read-only
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
     - path: /usr/bin/python3.11
+  claude_code:
+    name: claude_code
+    endpoints:
+    - host: api.anthropic.com
+      port: 443
+      protocol: rest
+      enforcement: enforce
+      access: full
+    - host: statsig.anthropic.com
+      port: 443
+      protocol: rest
+      enforcement: enforce
+      access: full
+    - host: sentry.io
+      port: 443
+      protocol: rest
+      enforcement: enforce
+      access: full
+    binaries:
+    - path: /**
   huggingface:
     name: huggingface
     endpoints:
@@ -66,6 +125,7 @@ network_policies:
       - allow:
           method: HEAD
           path: /**
+      allow_encoded_slash: true
     - host: cdn-lfs.huggingface.co
       port: 443
       protocol: rest
@@ -74,6 +134,7 @@ network_policies:
       - allow:
           method: GET
           path: /**
+      allow_encoded_slash: true
     - host: router.huggingface.co
       port: 443
       protocol: rest
@@ -87,4 +148,5 @@ network_policies:
           path: /**
     binaries:
     - path: /usr/lib/swipl/bin/aarch64-linux/swipl
+    - path: /usr/lib/swipl/bin/x86_64-linux/swipl
     - path: /usr/bin/python3.11
