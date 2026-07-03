@@ -1,5 +1,5 @@
 module.exports = {
-  branchPrefix: "main/",
+  branchPrefix: "main",
   username: "renovate-anseliv",
   gitAuthor: "Renovate Bot <bot@renovateapp.com>",
   onboarding: false,
