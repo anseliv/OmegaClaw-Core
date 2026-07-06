@@ -6,7 +6,7 @@ module.exports = {
   platform: "github",
   forkProcessing: "disable",
   repositories: ["anseliv/OmegaClaw-Core"],
-  "extends": ["config:best-practices"],
+  extends: ["config:recommended"],
   packageRules: [
     {
       description: "lockFileMaintenance",
