@@ -1,7 +1,7 @@
-# syntax=docker/dockerfile:1.7
+# syntax=docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
 
 # For maximum integrity, set this to an immutable digest in CI/CD.
-ARG SWIPL_IMAGE=docker.io/library/swipl:9.2.4
+ARG SWIPL_IMAGE=docker.io/library/swipl:9.2.4@sha256:3d5e9bdc6cfb77567ac0e5a55a990c2a5fd1306c37c98c8613ed7b296ae38f3b
 
 FROM ${SWIPL_IMAGE} AS builder
 

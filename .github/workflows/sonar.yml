@@ -11,7 +11,7 @@ on:
 
 jobs:
   sonar:
-    uses: singnet/security-workflows/.github/workflows/sonar.yml@master
+    uses: singnet/security-workflows/.github/workflows/sonar.yml@817e351af6e3d017c4319efec3978e446102c2eb # master
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
