@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 # For maximum integrity, set this to an immutable digest in CI/CD.
-ARG SWIPL_IMAGE=docker.io/library/swipl:9.2.4
+ARG SWIPL_IMAGE=docker.io/library/swipl:10.1.10
 
 FROM ${SWIPL_IMAGE} AS builder
 
