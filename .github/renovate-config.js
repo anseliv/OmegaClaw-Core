@@ -4,8 +4,8 @@ module.exports = {
   gitAuthor: "Renovate Bot <bot@renovateapp.com>",
   onboarding: false,
   platform: "github",
-  forkProcessing: "enabled",
-  dryRun: "full",
+  forkProcessing: "disable",
+  dryRun: "lookup",
   repositories: ["anseliv/OmegaClaw-Core"],
   packageRules: [
     {
