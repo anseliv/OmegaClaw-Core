@@ -5,7 +5,6 @@ module.exports = {
   onboarding: false,
   platform: "github",
   forkProcessing: "disable",
-  dryRun: "lookup",
   repositories: ["anseliv/OmegaClaw-Core"],
   packageRules: [
     {
