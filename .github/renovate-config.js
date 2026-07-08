@@ -7,6 +7,8 @@ module.exports = {
   forkProcessing: "disable",
   repositories: ["anseliv/OmegaClaw-Core"],
   extends: ["config:recommended"],
+  prCreation: "approval",
+  reviewers: "anseliv",
   packageRules: [
     {
       description: "lockFileMaintenance",
@@ -18,8 +20,7 @@ module.exports = {
         "major",
         "lockFileMaintenance",
       ],
-      dependencyDashboardApproval: false,
-      minimumReleaseAge: null,
+      minimumReleaseAge: 3,
     },
   ],
 };
