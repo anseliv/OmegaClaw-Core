@@ -8,9 +8,8 @@ module.exports = {
   repositories: ["anseliv/OmegaClaw-Core"],
   extends: ["config:recommended", ":dependencyDashboardApproval"],
   dependencyDashboardAutoclose: true,
-  prCreation: "approval",
   prConcurrentLimit: 10,
-  prHourlyLimit: 2,
+  prHourlyLimit: 0,
   recreateWhen: "always",
   reviewers: "anseliv",
   packageRules: [
