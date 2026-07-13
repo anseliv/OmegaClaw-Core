@@ -9,7 +9,8 @@ module.exports = {
   extends: ["config:recommended", ":dependencyDashboardApproval"],
   dependencyDashboardAutoclose: true,
   prCreation: "approval",
-  prConcurrentLimit: 2,
+  prConcurrentLimit: 10,
+  prHourlyLimit: 2,
   reviewers: "anseliv",
   packageRules: [
     {
@@ -22,7 +23,7 @@ module.exports = {
         "major",
         "lockFileMaintenance",
       ],
-      minimumReleaseAge: 3,
+      minimumReleaseAge: "3",
     },
   ],
 };
