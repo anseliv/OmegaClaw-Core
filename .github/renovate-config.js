@@ -6,10 +6,10 @@ module.exports = {
   platform: "github",
   forkProcessing: "disable",
   repositories: ["anseliv/OmegaClaw-Core"],
-  extends: ["config:recommended"],
+  extends: ["config:recommended", ":dependencyDashboardApproval"],
   dependencyDashboardAutoclose: true,
   prCreation: "approval",
-  prConcurrentLimit: 0,
+  prConcurrentLimit: 2,
   reviewers: "anseliv",
   packageRules: [
     {
