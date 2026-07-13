@@ -1,6 +1,6 @@
 module.exports = {
   branchPrefix: "renovate/",
-  username: "renovate-anseliv",
+  username: "renovate-anseliv[bot]",
   gitAuthor: "Renovate Bot <bot@renovate-anseliv.com>",
   onboarding: false,
   platform: "github",
