@@ -11,6 +11,7 @@ module.exports = {
   prCreation: "approval",
   prConcurrentLimit: 10,
   prHourlyLimit: 2,
+  recreateWhen: "always",
   reviewers: "anseliv",
   packageRules: [
     {
